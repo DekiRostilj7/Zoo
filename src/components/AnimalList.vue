@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li v-for= "(animal, index) in animals" :key= "index">
-        {{ animal.species + ': ' + animal.name + ', born: '}}{{ animal.dateOfBirth ? animal.dateOfBirth : "Unknown"}}<button @click="handleRemove(index)">Remove</button></li>
+        {{ animal.species + ': ' + animal.name + ', born: '}}{{ animal.dateOfBirth ? animal.dateOfBirth : "Unknown"}}<button @click="handleRemove(index)">X</button><button @click="moveOnTop(index)">Move on top</button></li>
     </ul>
   </div>
 </template>
@@ -24,6 +24,14 @@ export default {
   methods: {
     handleRemove(index){
       this.animals.splice(index, 1)
+    },
+
+    moveOnTop(index){
+      let animal = this.animals[index]
+      this.handleRemove(index);
+      this.animals.unshift(animal);
+
+
     }
   }
 }
